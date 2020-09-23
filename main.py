@@ -9,8 +9,11 @@ import tensorflow as tf
 from keras import backend as K
 from keras.preprocessing.image import load_img, img_to_array
 from skimage.transform import resize
+# import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
 
-import matplotlib.pyplot as plt
 
 # Define IoU metric
 
@@ -50,6 +53,7 @@ def upload():
         return render_template('home.html')
     
     if request.method == 'POST':
+        
         file = request.files.get('inputImage', '')
         filename = secure_filename(file.filename)
         path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -71,6 +75,7 @@ def upload():
 
         output = os.path.join(app.config['OUTPUT_FOLDER'], filename)
         plt.savefig(output)
+        plt.close();
         return render_template('home.html', input=path, output=output) 
 
 
