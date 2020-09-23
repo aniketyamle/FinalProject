@@ -1,0 +1,43 @@
+{% extends "layout.html" %} {% block content %}
+
+<script>
+  function loadInputImage(event) {
+    const image = document.getElementById("input-image-show");
+    image.src = URL.createObjectURL(event.target.files[0]);
+  }
+</script>
+
+<form action="/" method="POST" enctype="multipart/form-data">
+  <div class="file-field input-field">
+    <div class="btn grey">
+      <span>File</span>
+      <input
+        type="file"
+        name="inputImage"
+        accept="image/"
+        onChange="loadInputImage(event)"
+      />
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text" />
+    </div>
+  </div>
+  <button type="submit" class="btn">Submit</button>
+</form>
+
+<img
+  src="{{input}}"
+  id="input-image-show"
+  class="responsive-img"
+  width="40%"
+  style="margin-top: 20px;"
+/>
+<img
+  src="{{output}}"
+  id="output-image-show"
+  class="responsive-img"
+  width="40%"
+  style="margin-top: 20px;"
+/>
+
+{% endblock content %}
